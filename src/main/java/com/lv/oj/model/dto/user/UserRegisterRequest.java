@@ -1,4 +1,4 @@
-package com.lv.oj.model.dto;
+package com.lv.oj.model.dto.user;
 
 
 import java.io.Serializable;

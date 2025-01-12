@@ -76,8 +76,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 throw new BusinessException(ErrorCode.OPERATION_ERROR, "账号已存在");
             }
             User user = new User();
-            user.setUseraccount(userAccount);
-            user.setUserpassword(passWord);
+            user.setUserAccount(userAccount);
+            user.setUserPassword(passWord);
             boolean saveResult = this.save(user);
             if (!saveResult) {
                 throw new BusinessException(ErrorCode.SYSTEM_ERROR, "注册失败，数据库错误");

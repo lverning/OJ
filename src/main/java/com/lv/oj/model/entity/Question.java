@@ -1,6 +1,7 @@
 package com.lv.oj.model.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 题目
@@ -25,7 +26,7 @@ public class Question {
     /**
      * 标签列表（json数组）
      */
-    private String tags;
+    private List<String> tags;
 
     /**
      * 题目答案
@@ -127,14 +128,14 @@ public class Question {
     /**
      * 标签列表（json数组）
      */
-    public String getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
     /**
      * 标签列表（json数组）
      */
-    public void setTags(String tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 
