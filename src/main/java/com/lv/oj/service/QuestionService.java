@@ -1,7 +1,12 @@
 package com.lv.oj.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lv.oj.model.dto.question.QuestionQueryRequest;
 import com.lv.oj.model.entity.Question;
+import com.lv.oj.model.vo.QuestionVO;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
 * @author 吕
@@ -10,4 +15,25 @@ import com.lv.oj.model.entity.Question;
 */
 public interface QuestionService extends IService<Question> {
 
+    /**
+     * 校验
+     *
+     * @param question
+     * @param add
+     */
+    void validPost(Question question, boolean add);
+
+    /**
+     *
+     * @param question
+     * @return
+     */
+    QuestionVO getQuestionVO(Question question, HttpServletRequest request);
+
+    /**
+     *
+     * @param questionQueryRequest
+     * @return
+     */
+    QueryWrapper<Question> getQueryWrapper(QuestionQueryRequest questionQueryRequest);
 }

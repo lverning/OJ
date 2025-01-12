@@ -8,7 +8,6 @@ import com.lv.oj.model.dto.user.UserLoginRequest;
 import com.lv.oj.model.dto.user.UserRegisterRequest;
 import com.lv.oj.model.entity.User;
 import com.lv.oj.model.vo.LoginUserVO;
-import com.lv.oj.service.PostService;
 import com.lv.oj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.commons.lang3.StringUtils;
@@ -24,8 +23,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PostService postService;
 
     /**
      * 用户登录
