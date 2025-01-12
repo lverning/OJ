@@ -6,6 +6,7 @@ import com.lv.oj.common.ResultUtils;
 import com.lv.oj.exception.BusinessException;
 import com.lv.oj.model.dto.UserLoginRequest;
 import com.lv.oj.model.dto.UserRegisterRequest;
+import com.lv.oj.model.entity.User;
 import com.lv.oj.model.vo.LoginUserVO;
 import com.lv.oj.service.PostService;
 import com.lv.oj.service.UserService;
@@ -60,5 +61,31 @@ public class UserController {
         }
         Long result = userService.userRegister(userAccount,userPassword,checkPassword);
         return ResultUtils.success(result);
+    }
+
+    /**
+     * 用户注销
+     */
+
+    @PostMapping("/userLogout")
+    public BaseResponse<Boolean> userLogout(HttpServletRequest request){
+        if (request == null){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        boolean result = userService.userLogout(request);
+        return ResultUtils.success(result);
+    }
+
+    /**
+     * 获取当前登录用户
+     */
+
+    @PostMapping("/getLoginUser")
+    public BaseResponse<User> getLoginUser(HttpServletRequest request){
+        if (request == null){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        User user = userService.getLoginUser(request);
+        return ResultUtils.success(user);
     }
 }

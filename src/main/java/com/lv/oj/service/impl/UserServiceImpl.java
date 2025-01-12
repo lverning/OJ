@@ -87,6 +87,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     }
 
+    @Override
+    public boolean userLogout(HttpServletRequest request) {
+        if (request.getSession().getAttribute(USER_LOGIN_STATE) == null){
+            throw new BusinessException(ErrorCode.OPERATION_ERROR,"未登录");
+        }
+        // 移除登录状态
+        request.getSession().removeAttribute(USER_LOGIN_STATE);
+        return true;
+    }
+
+    @Override
+    public User getLoginUser(HttpServletRequest request) {
+        if (request.getSession().getAttribute(USER_LOGIN_STATE) == null){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR,"未登录");
+        }
+        User user = (User) request.getSession().getAttribute(USER_LOGIN_STATE);
+        return user;
+    }
+
 
     @Override
     public LoginUserVO getLoginUserVO(User user) {
