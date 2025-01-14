@@ -1,11 +1,12 @@
 package com.lv.oj.model.dto.question;
 
+import com.lv.oj.common.PageRequest;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class QuestionQueryRequest {
+public class QuestionQueryRequest extends PageRequest {
 
     /**
      * id

@@ -1,6 +1,7 @@
 package com.lv.oj.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.lv.oj.common.PageRequest;
 import com.lv.oj.model.dto.question.JudgeConfig;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 /**
  * 题目
+ *
  * @TableName question
  */
 @Data

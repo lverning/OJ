@@ -1,6 +1,9 @@
 package com.lv.oj.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.gson.Gson;
 import com.lv.oj.common.BaseResponse;
 import com.lv.oj.common.DeleteRequest;
@@ -11,8 +14,10 @@ import com.lv.oj.exception.ThrowUtils;
 import com.lv.oj.model.dto.question.JudgeCase;
 import com.lv.oj.model.dto.question.JudgeConfig;
 import com.lv.oj.model.dto.question.QuestionAddRequest;
+import com.lv.oj.model.dto.question.QuestionQueryRequest;
 import com.lv.oj.model.entity.Question;
 import com.lv.oj.model.entity.User;
+import com.lv.oj.model.vo.QuestionVO;
 import com.lv.oj.service.QuestionService;
 import com.lv.oj.service.QuestionSubmitService;
 import com.lv.oj.service.UserService;
@@ -101,5 +106,19 @@ public class QuestionController {
         }
         boolean b = questionService.removeById(id);
         return ResultUtils.success(b);
+    }
+
+    @PostMapping("/pageQuestionQuery")
+    public BaseResponse<Page<QuestionVO>> pageQuestionQuery(@RequestBody QuestionQueryRequest questionQueryRequest, HttpServletRequest request) {
+        if (questionQueryRequest == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        long current = questionQueryRequest.getCurrent();
+        long size = questionQueryRequest.getSize();
+        QueryWrapper<Question> queryWrapper = questionService.getPageQuestion(questionQueryRequest);
+        Page<Question> page = questionService.page(new Page<>(current, size), queryWrapper);
+        // 脱敏
+        Page<QuestionVO> questionVOPage = questionService.getQuestionVOPage(page, request);
+        return ResultUtils.success(questionVOPage);
     }
 }
