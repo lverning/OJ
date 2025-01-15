@@ -8,12 +8,14 @@ import com.lv.oj.model.entity.Question;
 import com.lv.oj.model.vo.QuestionVO;
 import com.lv.oj.service.QuestionService;
 import com.lv.oj.service.impl.QuestionServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+@Slf4j
 @SpringBootTest
 class SpringBootOjApplicationTests {
 
@@ -28,6 +30,10 @@ class SpringBootOjApplicationTests {
         for (int i = 0; i <records.size(); i++) {
             System.out.println(records.get(i));
         }
+    }
+
+    public static void main(String[] args) {
+        log.info("123","1");
     }
 
 }

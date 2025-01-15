@@ -3,10 +3,11 @@ package com.lv.oj.model.dto.question;
 import com.lv.oj.common.PageRequest;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class QuestionQueryRequest extends PageRequest {
+public class QuestionQueryRequest extends PageRequest implements Serializable {
 
     /**
      * id

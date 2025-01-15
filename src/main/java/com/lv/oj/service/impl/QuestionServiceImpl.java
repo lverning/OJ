@@ -109,14 +109,14 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     @Override
     public QueryWrapper<Question> getPageQuestion(QuestionQueryRequest questionQueryRequest) {
         QueryWrapper<Question> queryWrapper = new QueryWrapper<>();
-        if (StringUtils.isNotBlank(questionQueryRequest.getContent())) {
-            queryWrapper.like("content", questionQueryRequest.getContent());
-        }
-        if (StringUtils.isNotBlank(questionQueryRequest.getContent())) {
-            queryWrapper.like("title", questionQueryRequest.getContent());
+        if (!ObjectUtils.isEmpty(questionQueryRequest.getId())) {
+            queryWrapper.like("id", questionQueryRequest.getId());
         }
         if (StringUtils.isNotBlank(questionQueryRequest.getContent())) {
             queryWrapper.like("content", questionQueryRequest.getContent());
+        }
+        if (StringUtils.isNotBlank(questionQueryRequest.getTitle())) {
+            queryWrapper.like("title", questionQueryRequest.getTitle());
         }
         return queryWrapper;
     }

@@ -9,6 +9,8 @@ import com.lv.oj.common.BaseResponse;
 import com.lv.oj.common.DeleteRequest;
 import com.lv.oj.common.ErrorCode;
 import com.lv.oj.common.ResultUtils;
+import com.lv.oj.constant.UserConstant;
+import com.lv.oj.enums.UserRoleEnum;
 import com.lv.oj.exception.BusinessException;
 import com.lv.oj.exception.ThrowUtils;
 import com.lv.oj.model.dto.question.JudgeCase;
@@ -47,7 +49,7 @@ public class QuestionController {
     private final static Gson GSON = new Gson();
 
     /**
-     * 创建
+     * 创建题目
      *
      * @param questionAddRequest
      * @param request
@@ -108,6 +110,13 @@ public class QuestionController {
         return ResultUtils.success(b);
     }
 
+    /**
+     * 分页查询
+     *
+     * @param questionQueryRequest
+     * @param request
+     * @return
+     */
     @PostMapping("/pageQuestionQuery")
     public BaseResponse<Page<QuestionVO>> pageQuestionQuery(@RequestBody QuestionQueryRequest questionQueryRequest, HttpServletRequest request) {
         if (questionQueryRequest == null) {
@@ -120,5 +129,29 @@ public class QuestionController {
         // 脱敏
         Page<QuestionVO> questionVOPage = questionService.getQuestionVOPage(page, request);
         return ResultUtils.success(questionVOPage);
+    }
+
+    /**
+     * 分页查询（管理员）
+     *
+     * @param questionQueryRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/pageQuestionQueryAdmin")
+    public BaseResponse<Page<Question>> pageQuestionQueryAdmin(@RequestBody QuestionQueryRequest questionQueryRequest, HttpServletRequest request){
+        if (questionQueryRequest == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 判断是否为管理员
+        User loginUser = userService.getLoginUser(request);
+        if (!loginUser.getUserRole().equals(UserConstant.ADMIN_ROLE)){
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
+        }
+        long current = questionQueryRequest.getCurrent();
+        long size = questionQueryRequest.getSize();
+        QueryWrapper<Question> queryWrapper = questionService.getPageQuestion(questionQueryRequest);
+        Page<Question> page = questionService.page(new Page<>(current, size), queryWrapper);
+        return ResultUtils.success(page);
     }
 }

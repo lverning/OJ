@@ -37,7 +37,7 @@ public interface QuestionService extends IService<Question> {
     QueryWrapper<Question> getQueryWrapper(QuestionQueryRequest questionQueryRequest);
 
     /**
-     * 分页查询
+     * 分页查询构造器
      *
      * @param questionQueryRequest
      * @return
@@ -45,5 +45,11 @@ public interface QuestionService extends IService<Question> {
     QueryWrapper<Question> getPageQuestion(QuestionQueryRequest questionQueryRequest);
 
 
+    /**
+     * 数据脱敏
+     * @param page
+     * @param request
+     * @return
+     */
     Page<QuestionVO> getQuestionVOPage(Page<Question> page, HttpServletRequest request);
 }
