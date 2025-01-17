@@ -26,9 +26,9 @@ public class QuestionSubmit {
     private String code;
 
     /**
-     * 判题信息（json对象）
+     * 判题信息（json 对象）
      */
-    private String judgeCase;
+    private String judgeInfo;
 
     /**
      * 判题状态 (0-待判题,1-判题中,2-成功,3-失败)
