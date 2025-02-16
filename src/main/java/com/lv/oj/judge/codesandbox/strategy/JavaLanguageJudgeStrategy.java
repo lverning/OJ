@@ -25,6 +25,7 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
      */
     @Override
     public JudgeInfo doJudge(JudgeContext judgeContext) {
+        log.info("JavaLanguageJudgeStrategy");
         JudgeInfo judgeInfo = judgeContext.getJudgeInfo();
         Long memory = judgeInfo.getMemory();
         Long time = judgeInfo.getTime();
@@ -36,6 +37,7 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
         judgeInfoResponse.setMemory(memory);
         judgeInfoResponse.setTime(time);
         // 先判断沙箱执行的结果输出数量是否和预期输出数量相等
+        log.info("先判断沙箱执行的结果输出数量是否和预期输出数量相等");
         if (inputList.size() != outputList.size()) {
             judgeInfoMessageEnum = JudgeInfoMessageEnum.WRONG_ANSWER;
             judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
@@ -43,6 +45,7 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
             return judgeInfoResponse;
         }
         // 依次判断每一项输出和预期输出是否相等
+        log.info("依次判断每一项输出和预期输出是否相等");
         for (int i = 0; i < judgeCaseList.size(); i++) {
             JudgeCase judgeCase = judgeCaseList.get(i);
             if (!judgeCase.getOutput().equals(outputList.get(i))) {
@@ -53,23 +56,27 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
             }
         }
         // 判断题目限制
+        log.info("判断题目限制");
         Question question = judgeContext.getQuestion();
         String judgeConfigStr = question.getJudgeConfig();
         JudgeConfig judgeConfig = JSONUtil.toBean(judgeConfigStr, JudgeConfig.class);
-        if (memory > judgeConfig.getMemoryLimit()) {
-            judgeInfoMessageEnum = JudgeInfoMessageEnum.MEMORY_LIMIT_EXCEEDED;
-            judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
-            log.info("内存判断超出");
-            return judgeInfoResponse;
-        }
+        log.info("judgeConfig");
+//        if (memory > judgeConfig.getMemoryLimit()) {
+//            log.info("memory");
+//            judgeInfoMessageEnum = JudgeInfoMessageEnum.MEMORY_LIMIT_EXCEEDED;
+//            judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
+//            log.info("内存判断超出");
+//            return judgeInfoResponse;
+//        }
         // Java 程序本身需要额外执行 10 秒钟
-        long JAVA_PROGRAM_TIME_COST = 1L;
-        if ((time - JAVA_PROGRAM_TIME_COST) > judgeConfig.getTimeLimit()) {
-            judgeInfoMessageEnum = JudgeInfoMessageEnum.TIME_LIMIT_EXCEEDED;
-            judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
-            log.info("时间判断超出");
-            return judgeInfoResponse;
-        }
+//        long JAVA_PROGRAM_TIME_COST = 1L;
+//        if ((time - JAVA_PROGRAM_TIME_COST) > judgeConfig.getTimeLimit()) {
+//            judgeInfoMessageEnum = JudgeInfoMessageEnum.TIME_LIMIT_EXCEEDED;
+//            judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
+//            log.info("时间判断超出");
+//            return judgeInfoResponse;
+//        }
+        log.info("setMessage");
         judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
         log.info("代码判断成功");
         return judgeInfoResponse;

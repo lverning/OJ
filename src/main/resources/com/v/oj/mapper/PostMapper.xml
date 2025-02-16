@@ -9,12 +9,12 @@
             <result property="title" column="title" />
             <result property="content" column="content" />
             <result property="tags" column="tags" />
-            <result property="thumbnum" column="thumbNum" />
-            <result property="favournum" column="favourNum" />
-            <result property="userid" column="userId" />
-            <result property="createtime" column="createTime" />
-            <result property="updatetime" column="updateTime" />
-            <result property="isdelete" column="isDelete" />
+            <result property="thumbNum" column="thumbNum" />
+            <result property="favourNum" column="favourNum" />
+            <result property="userId" column="userId" />
+            <result property="createTime" column="createTime" />
+            <result property="updateTime" column="updateTime" />
+            <result property="isDelete" column="isDelete" />
     </resultMap>
 
     <sql id="Base_Column_List">

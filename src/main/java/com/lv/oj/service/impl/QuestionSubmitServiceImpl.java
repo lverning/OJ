@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -70,6 +71,11 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
            judgeService.doJudge(questionSubmitId);
         });
         return questionSubmitId;
+    }
+
+    @Override
+    public List<QuestionSubmit> questionSubmitList() {
+        return this.list();
     }
 }
 

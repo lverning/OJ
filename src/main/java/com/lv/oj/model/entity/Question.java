@@ -5,6 +5,7 @@ import com.lv.oj.common.PageRequest;
 import com.lv.oj.model.dto.question.JudgeConfig;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * @TableName question
  */
 @Data
-public class Question {
+public class Question implements Serializable {
     /**
      * id
      */
@@ -89,6 +90,8 @@ public class Question {
      * 是否删除
      */
     private Integer isDelete;
+
+    private static final long serialVersionUID = 1L;
 
 
 }

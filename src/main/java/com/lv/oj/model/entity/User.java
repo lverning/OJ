@@ -2,6 +2,7 @@ package com.lv.oj.model.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  * @TableName user
  */
 @Data
-public class User {
+public class User implements Serializable {
     /**
      * id
      */
@@ -69,5 +70,8 @@ public class User {
      * 是否删除
      */
     private Integer isDelete;
+
+    private static final long serialVersionUID = 1L;
+
 
 }

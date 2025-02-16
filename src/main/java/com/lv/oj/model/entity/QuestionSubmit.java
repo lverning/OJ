@@ -2,6 +2,7 @@ package com.lv.oj.model.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  * @TableName question_submit
  */
 @Data
-public class QuestionSubmit {
+public class QuestionSubmit implements Serializable {
     /**
      * id
      */
@@ -59,6 +60,9 @@ public class QuestionSubmit {
      * 是否删除
      */
     private Integer isDelete;
+
+    private static final long serialVersionUID = 1L;
+
 
 
 }

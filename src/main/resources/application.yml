@@ -6,7 +6,14 @@ spring:
     url: jdbc:mysql://localhost:3306/my_db
     username: root
     password: 123456
-
+  redis:
+    database: 1
+    host: localhost
+    port: 6379
+    timeout: 5000
+  session:
+    store-type: redis
+    timeout: 259200
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: false
@@ -27,4 +34,4 @@ knife4j:
           - com.lv.oj.controller
 # 代码沙箱配置
 codesandbox:
-  type: example
+  type: remote
